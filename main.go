@@ -55,7 +55,8 @@ func main() {
             continue
         }
 
-        if hideImages {
+        // considering only images without params
+        if hideImages && len(u.RawQuery) == 0 {
             pos := strings.LastIndexByte(u.Path, '.')
             if pos != -1 {
                 ext := strings.ToLower(u.Path[pos+1:])
@@ -67,10 +68,9 @@ func main() {
 
         // ignore scheme, port, query values, auth info and hash
         key := u.Host + u.Path
-        q := u.Query()
-        if len(q) != 0 {
+        if len(u.RawQuery) != 0 {
             key += "?"
-            for k, _ := range q {
+            for k, _ := range u.Query() {
                 key += k + "&"
             }
         }
