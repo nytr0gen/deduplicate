@@ -6,7 +6,7 @@ I made this so that I can go faster through [wayback urls](https://github.com/to
 
 ## How does it work?
 
-Glad you asked. It formats an url to '%host%path%query_names', checks if the url was already found, if not, adds it into the map.
+Glad you asked. It formats an url to `%host%path%query_names`, checks if the url was already found, if not, adds it into the map.
 
 ## Install
 
