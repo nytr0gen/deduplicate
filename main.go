@@ -13,8 +13,8 @@ import (
 func main() {
     var urls []string
 
-    var hideImages bool
-    flag.BoolVar(&hideImages, "hide-images", false, "hide images")
+    var hideUseless bool
+    flag.BoolVar(&hideUseless, "hide-useless", false, "hide useless extension (images, fonts, css, swf) if there's no query")
 
     var shouldSort bool
     flag.BoolVar(&shouldSort, "sort", true, "sort output")
@@ -55,12 +55,12 @@ func main() {
             continue
         }
 
-        // considering only images without params
-        if hideImages && len(u.RawQuery) == 0 {
+        // considering only useless extensions without params
+        if hideUseless && len(u.RawQuery) == 0 {
             pos := strings.LastIndexByte(u.Path, '.')
             if pos != -1 {
                 ext := strings.ToLower(u.Path[pos+1:])
-                if extIsImage(ext) {
+                if extIsUseless(ext) {
                     continue
                 }
             }
@@ -68,11 +68,16 @@ func main() {
 
         // ignore scheme, port, query values, auth info and hash
         key := u.Host + u.Path
-        if len(u.RawQuery) != 0 {
-            key += "?"
+        if len(u.RawQuery) > 0 {
+            queryParams := make([]string, len(u.Query()))
+            i := 0
             for k, _ := range u.Query() {
-                key += k + "&"
+                queryParams[i] = k
+                i++
             }
+            sort.Strings(queryParams)
+
+            key += "?" + strings.Join(queryParams, "&")
         }
 
         if val, ok := found[key]; ok {
@@ -110,4 +115,18 @@ func extIsImage(ext string) bool {
         ext == "ico" ||
         ext == "jpg" ||
         ext == "jpeg")
+}
+
+func extIsFont(ext string) bool {
+    return (ext == "eof" ||
+        ext == "ttf" ||
+        ext == "woff" ||
+        ext == "woff2")
+}
+
+func extIsUseless(ext string) bool {
+    return (extIsImage(ext) ||
+        extIsFont(ext) ||
+        ext == "swf" ||
+        ext == "css")
 }

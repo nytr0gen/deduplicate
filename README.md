@@ -17,5 +17,5 @@ go get github.com/nytr0gen/deduplicate
 ## Usage
 
 ```bash
-echo domain | waybackurls | deduplicate --hide-images --sort
+echo domain | waybackurls | deduplicate --hide-useless --sort
 ```
