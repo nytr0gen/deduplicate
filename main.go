@@ -118,7 +118,7 @@ func extIsImage(ext string) bool {
 }
 
 func extIsFont(ext string) bool {
-    return (ext == "eof" ||
+    return (ext == "eot" ||
         ext == "ttf" ||
         ext == "woff" ||
         ext == "woff2")
