@@ -1,6 +1,6 @@
 # Deduplicate
 
-Parsing through long lists of endpoints, full of params, became a hassle? You want to get out? So no more, Deduplicate is the solution. With less than 200 lines of code, written in Go, it will remove any duplicates from your lists and make visual parsing a bliss.
+Parsing through long lists of endpoints, full of params, became a hassle? You want to get out? Say no more, Deduplicate is the solution. With less than 200 lines of code, written in Go, it will remove any duplicates from your lists and make visual parsing a bliss.
 
 I made this so that I can go faster through [wayback urls](https://github.com/tomnomnom/waybackurls) output.
 
