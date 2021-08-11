@@ -14,7 +14,7 @@ func main() {
     var urls []string
 
     var hideUseless bool
-    flag.BoolVar(&hideUseless, "hide-useless", false, "hide useless extension (images, fonts, css, swf) if there's no query")
+    flag.BoolVar(&hideUseless, "hide-useless", false, "hide useless extension (images, fonts, css, swf, videos) if there's no query")
 
     var shouldSort bool
     flag.BoolVar(&shouldSort, "sort", true, "sort output")
@@ -109,6 +109,19 @@ func main() {
     }
 }
 
+func extIsVideo(ext string) bool {
+    return (ext == "mp4" ||
+        ext == "mp3" ||
+        ext == "avi" ||
+        ext == "mov" ||
+        ext == "wmv" ||
+        ext == "flv" ||
+        ext == "mkv" ||
+        ext == "webm" ||
+        ext == "mpg" ||
+        ext == "mpeg")
+}
+
 func extIsImage(ext string) bool {
     return (ext == "png" ||
         ext == "gif" ||
@@ -127,6 +140,7 @@ func extIsFont(ext string) bool {
 func extIsUseless(ext string) bool {
     return (extIsImage(ext) ||
         extIsFont(ext) ||
+        extIsVideo(ext) ||
         ext == "swf" ||
         ext == "css")
 }
