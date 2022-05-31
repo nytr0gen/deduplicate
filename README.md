@@ -11,7 +11,7 @@ Glad you asked. It formats an url to `%host%path%query_names`, checks if the url
 ## Install
 
 ```bash
-go get github.com/nytr0gen/deduplicate
+go install github.com/nytr0gen/deduplicate@latest
 ```
 
 ## Usage
